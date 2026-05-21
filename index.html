@@ -125,7 +125,7 @@
       return (
         <div style={{ minHeight: "100vh", backgroundColor: "#008080", fontFamily: "serif", position: "relative" }}>
           <h1 style={{ color: "white", margin: 0, padding: "20px" }}>Puter Computer</h1>
-          <p style={{ color: "white", paddingLeft: "20px" }}>Click the buttons on the side to do stuff.</p>
+          <p style={{ color: "white", paddingLeft: "20px" }}>Click the buttons on the side to do things</p>
 
           <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "10px", width: "120px" }}>
              <button onClick={() => toggleWindow('about')} style={{ padding: "5px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}>About Me</button>
@@ -135,7 +135,7 @@
 
           {renderWindow("about", (
             <div>
-              <p><b>Hello! I'm Puter Computer.</b></p>
+              <p><b>Hello!</b></p>
               <p>I'm your average british teenager who is also a coder, upcoming music artist (if I can be bothered?? lol). I used to make Roblox games as a main thing, but the updates have demotivated me, so it's more of a side thing. Thanks for reading.</p>
               <p>Try out the buttons on the side :)</p>
             </div>
@@ -160,8 +160,8 @@
 
           {renderWindow("contact", (
             <div>
-              <p><b>Contact Info</b></p>
-              <p>You can reach me directly via my email address below:</p>
+              <p><b>Contact me</b></p>
+              <p>You can contact me through my email:</p>
               <div style={{ border: "2px solid gray", borderBottomColor: "white", borderRightColor: "white", padding: "8px", backgroundColor: "white", userSelect: "text" }}>
                 <a href="mailto:PuterComputer@proton.me" style={{ color: "blue", textDecoration: "underline", fontWeight: "bold" }}>
                   PuterComputer@proton.me
