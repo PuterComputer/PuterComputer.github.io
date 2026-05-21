@@ -4,17 +4,11 @@ export default function App() {
   const [windows, setWindows] = useState({
     about: { open: true, z: 1, title: "readme", top: 80, left: 160 },
     synth: { open: false, z: 2, title: "sounds", top: 140, left: 200 },
-    contact: { open: false, z: 3, title: "contactme", top: 200, left: 240 },
-    inbox: { open: false, z: 4, title: "inbox.txt", top: 260, left: 280 }
+    contact: { open: false, z: 3, title: "contactme", top: 200, left: 240 }
   });
-  const [maxZ, setMaxZ] = useState(4);
+  const [maxZ, setMaxZ] = useState(3);
   
   const audioCtxRef = useRef(null);
-
-  const [contactName, setContactName] = useState("");
-  const [contactMsg, setContactMsg] = useState("");
-  const [statusMessage, setStatusMessage] = useState("");
-  const [receivedMessages, setReceivedMessages] = useState([]);
 
   const playSynthNote = (freq, type = 'sawtooth') => {
     try {
@@ -77,25 +71,6 @@ export default function App() {
     });
   };
 
-  const handleSendContact = (e) => {
-    e.preventDefault();
-    if (!contactName.trim() || !contactMsg.trim()) {
-      setStatusMessage("Please write your name and message first!");
-      return;
-    }
-
-    const newMsg = {
-      name: contactName,
-      text: contactMsg,
-      time: new Date().toLocaleTimeString()
-    };
-
-    setReceivedMessages(prev => [newMsg, ...prev]);
-    setStatusMessage("Message saved! Open inbox.txt to see it.");
-    setContactName("");
-    setContactMsg("");
-  };
-
   const renderWindow = (id, content) => {
     if (!windows[id].open) return null;
     return (
@@ -138,7 +113,6 @@ export default function App() {
          <button onClick={() => toggleWindow('about')} style={{ padding: "5px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}>About Me</button>
          <button onClick={() => toggleWindow('synth')} style={{ padding: "5px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}>Synth</button>
          <button onClick={() => toggleWindow('contact')} style={{ padding: "5px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}>Contact Me</button>
-         <button onClick={() => toggleWindow('inbox')} style={{ padding: "5px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}>Inbox</button>
       </div>
 
       {renderWindow("about", (
@@ -168,56 +142,13 @@ export default function App() {
 
       {renderWindow("contact", (
         <div>
-          <p><b>Send a Message</b></p>
-          <form onSubmit={handleSendContact}>
-            <div style={{ marginBottom: "8px" }}>
-              <label style={{ display: "block", marginBottom: "3px" }}>Your Name:</label>
-              <input 
-                type="text" 
-                value={contactName}
-                onChange={(e) => setContactName(e.target.value)}
-                style={{ width: "100%", boxSizing: "border-box", border: "2px solid gray", borderBottomColor: "white", borderRightColor: "white", padding: "2px" }}
-              />
-            </div>
-            <div style={{ marginBottom: "8px" }}>
-              <label style={{ display: "block", marginBottom: "3px" }}>Message:</label>
-              <textarea 
-                value={contactMsg}
-                onChange={(e) => setContactMsg(e.target.value)}
-                rows={3}
-                style={{ width: "100%", boxSizing: "border-box", border: "2px solid gray", borderBottomColor: "white", borderRightColor: "white", padding: "2px", resize: "none" }}
-              />
-            </div>
-            <button 
-              type="submit" 
-              style={{ padding: "5px 10px", backgroundColor: "#c0c0c0", border: "2px solid black", borderTopColor: "white", borderLeftColor: "white", cursor: "pointer" }}
-            >
-              Send
-            </button>
-          </form>
-          {statusMessage && (
-            <p style={{ marginTop: "10px", color: "blue", fontWeight: "bold" }}>
-              {statusMessage}
-            </p>
-          )}
-        </div>
-      ))}
-
-      {renderWindow("inbox", (
-        <div>
-          <p><b>Messages Received</b></p>
-          {receivedMessages.length === 0 ? (
-            <p>No messages yet.</p>
-          ) : (
-            <div style={{ maxHeight: "200px", overflowY: "auto", border: "2px solid gray", backgroundColor: "white", padding: "4px" }}>
-              {receivedMessages.map((m, idx) => (
-                <div key={idx} style={{ borderBottom: "1px dashed black", paddingBottom: "5px", marginBottom: "5px" }}>
-                  <span style={{ fontSize: "10px", color: "gray" }}>[{m.time}]</span> <b>{m.name}:</b>
-                  <p style={{ margin: "2px 0 0 0" }}>{m.text}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <p><b>Contact Info</b></p>
+          <p>You can reach me directly via my email address below:</p>
+          <div style={{ border: "2px solid gray", borderBottomColor: "white", borderRightColor: "white", padding: "8px", backgroundColor: "white", userSelect: "text" }}>
+            <a href="mailto:PuterComputer@proton.me" style={{ color: "blue", textDecoration: "underline", fontWeight: "bold" }}>
+              PuterComputer@proton.me
+            </a>
+          </div>
         </div>
       ))}
 
